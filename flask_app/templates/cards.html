@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body{
+            background-color: rgb(155, 148, 148);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-between align-items-center mb-5 p-3 bg-dark">
+        <div></div>
+        <h1 class="display-1">STUDY BUDDY</h1>
+        <div>
+            <a href="/dashboard" name="dashboard" class="btn btn-light">Dashboard</a>
+            <a href="/logout" name="logout" class="btn btn-secondary">Logout</a>
+        </div>
+    </div>
+    <div>
+        <div class="d-flex justify-content-around align-items-center">
+            <h2 class="display-3">Index Cards for {{current_topic.name}}</h2>
+            <a href="/card/new/{{current_topic.id}}" name="new_card" class="btn btn-light mb-3 mt-3">Add Index Card</a>
+        </div>
+        <br>
+        {% if one_topic.cards|length > 0: %}
+            {% for card in one_topic.cards: %}
+            <div class="d-flex justify-content-between m-5 p-3 bg-dark rounded">
+                <div>
+                    <h3 class="display-5 mb-3">{{card.word}}</h3>
+                    <h5 class="display-6">{{card.description}}</h5>
+                </div>
+                <div>
+                    <a href="/card/edit/{{card.id}}/{{card.topic_id}}" name="delete_card" class="btn btn-light">Update Index Card</a>
+                    <a href="/card/delete/{{card.id}}/{{card.topic_id}}" name="delete_card" class="btn btn-light">Delete Index Card</a>
+                </div>
+            </div>
+            {% endfor%}
+        {% else: %}
+            <h2 class="display-3 d-flex justify-content-center m-5">No Cards Available</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
